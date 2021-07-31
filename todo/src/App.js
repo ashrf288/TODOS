@@ -35,7 +35,6 @@ class App extends React.Component {
       let index=this.state.filtered.findIndex((todo)=>{
          return  todo.id === id
       })
-      console.log(state.filtered[index]);
 
     state.todos = state.todos.filter((todo) => {
       return todo.id !== id
@@ -55,11 +54,10 @@ class App extends React.Component {
     let item = state.todos.findIndex((todo) => {
       return todo.id === id
     })
-    console.log(item)
-    // state.todos[item].isDone = !state.todos[item].isDone;
+    
+
     state.filtered[item].isDone = !state.filtered[item].isDone;
-    console.log(  state.todos[item].isDone)
-    console.log(state.filtered[item].isDone )
+    
     
     this.setState(state)
     console.log(state.filtered);
