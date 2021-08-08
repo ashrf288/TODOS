@@ -12,7 +12,7 @@ class App extends React.Component {
     this.state = {
       todos: [...this.getData()],
       filtered:  [...this.getData()],
-  
+
     }
   }
 
@@ -21,13 +21,13 @@ class App extends React.Component {
   addHandler = (childData) => {
     let state = this.state;
     state.todos.push(childData)
-    
+
     this.setState( state )
     console.log(this, state.todos)
-    this.filtiringData() // called here because filter starts at null value but if we call it here it 
+    this.filtiringData() // called here because filter starts at null value but if we call it here it
     // will give it a value of all.
       localStorage.setItem('old', JSON.stringify(this.state.todos));
-      
+
   }
 
   removeHandler = (id) => {
@@ -42,7 +42,7 @@ class App extends React.Component {
     state.filtered = state.filtered.filter((todo) => {
       return todo.id !== id
     })
-   
+
     console.log(state)
     this.setState(state)
     localStorage.setItem('old', JSON.stringify(this.state.todos));
@@ -54,11 +54,11 @@ class App extends React.Component {
     let item = state.todos.findIndex((todo) => {
       return todo.id === id
     })
-    
+
 
     state.filtered[item].isDone = !state.filtered[item].isDone;
-    
-    
+
+
     this.setState(state)
     console.log(state.filtered);
     localStorage.setItem('old', JSON.stringify(this.state.todos));
@@ -68,27 +68,27 @@ class App extends React.Component {
 
   filtiringData=(filter='all')=>{
     let state=this.state;
-    filter=='completed'&&
+    filter==='completed'&&
      (state.filtered= state.todos.filter((todo)=>{
        return todo.isDone===true
     }))
-    filter=='uncompleted'&&
+    filter==='uncompleted'&&
     (state.filtered=state.todos.filter((todo)=>{
        return todo.isDone===false
     }))
-    filter=='all'&&
+    filter==='all'&&
     (state.filtered=state.todos)
 
     this.setState(state)
     console.log(this.state.filtered)
-    
+
   }
   getData=()=>{
     let data=JSON.parse(localStorage.getItem('old'));
     return (data?(data):[])
   }
 
- 
+
   render() {
     return (
       <div>
@@ -102,7 +102,7 @@ class App extends React.Component {
           <Form handler={this.addHandler} filtering={this.filtiringData} />
 
         </div>
-        
+
         {this.state.filtered.map((todo,index) => {
           return (
             <TodoList data={todo.todo} key={index} id={todo.id}
